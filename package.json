@@ -1,0 +1,27 @@
+{
+  "name": "team-profile-gen",
+  "version": "1.0.0",
+  "description": "profile generator",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riheelh/team-profile-gen.git"
+  },
+  "author": "riheel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riheelh/team-profile-gen/issues"
+  },
+  "homepage": "https://github.com/riheelh/team-profile-gen#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "jest": "^26.6.3"
+  }
+}
