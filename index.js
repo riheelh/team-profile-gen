@@ -3,58 +3,164 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern')
-
-
-const questions = [
-    {
-        type: 'input',
-        message: `What is the Manager's name ?`,
-        name: 'name',
-    },
-    {
-        type: 'number',
-        message: `What is the Manager's employee ID ?`,
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: `What is the Manager's email address ?`,
-        name: 'email',
-    },
-    {
-        type: 'number',
-        message: `What is the Manager's office number ?`,
-        name: 'officeNumber',
-    },
-]
-
-// somthing is wrong here
+var teamArray = []
 
 //create function to generate the Manager data
-function Mconstructer(data) {
+function managerConst(data) {
     var ManagerData = new Manager(data.name, data.id, data.email, data.officeNumber)
     return ManagerData
 }
+
 //create function to generate the Engineer data
-function Econstructer(data) {
-    var EngineerData = new Manager(data.name, data.id, data.email, data.github)
-    return EngineerData
-}
-//create function to generate the Intern data
-function Iconstructer(data) {
-    var InternData = new Manager(data.name, data.id, data.email, data.school)
+function engineerConst(data) {
+    var EngineerData = new Engineer(data.name, data.id, data.email, data.github)
     return EngineerData
 }
 
-//an array to store all generated objects
+//create function to generate the Intern data
+function internConst(data) {
+    var InternData = new Intern(data.name, data.id, data.email, data.school)
+    return InternData
+}
 
 //function to write new html file that ingest data from the array 
 
+
 const init = () => {
-    inquirer.prompt(questions)
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: `What is the Manager's name ?`,
+            name: 'name',
+        },
+        {
+            type: 'number',
+            message: `What is the Manager's employee ID ?`,
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: `What is the Manager's email address ?`,
+            name: 'email',
+        },
+        {
+            type: 'number',
+            message: `What is the Manager's office number ?`,
+            name: 'officeNumber',
+        },
+        {
+            type: 'list',
+            message: `choose your team member?`,
+            name: 'choose',
+            choices: ["Engineer", "Intern","Exit"],
+        },
+    ])
     .then((data) => {
-        // console.log(data)
-        console.log(Mconstructer(data))
+        var managerName = managerConst(data)
+        teamArray.push(managerName)
+        console.log(teamArray)
+        if(data.choose === "Exit"){
+            return;
+        } else if(data.choose ==="Engineer") {
+            return getEngineer();
+        } else if(data.choose ==="Intern") {
+            return getIntern();
+        }  
+    })
+    .catch((err) => console.error(err));
+}
+
+const getEngineer = () => {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: `What is the Engineer's name ?`,
+            name: 'name',
+        },
+        {
+            type: 'number',
+            message: `What is the Engineer's employee ID ?`,
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: `What is the Engineer's email address ?`,
+            name: 'email',
+        },
+        {
+            type: 'input',
+            message: `What is the Engineer's github address ?`,
+            name: 'github',
+        },
+        {
+            type: 'list',
+            message: `choose your team member?`,
+            name: 'choose',
+            choices: ["Engineer", "Intern","Exit"],
+        }, 
+
+    ])
+    .then((data) => {
+        var engineerName = engineerConst(data)
+        teamArray.push(engineerName)
+        console.log(teamArray)
+        if(data.choose === "Exit"){
+            return;
+        } else if(data.choose ==="Engineer") {
+            return getEngineer();
+        } else if(data.choose ==="Intern") {
+            return getIntern();
+        }
+
+    })
+    .catch((err) => console.error(err));
+}
+
+const getIntern = () => {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: `What is the Intern's name ?`,
+            name: 'name',
+        },
+        {
+            type: 'number',
+            message: `What is the Intern's employee ID ?`,
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: `What is the Intern's email address ?`,
+            name: 'email',
+        },
+        {
+            type: 'input',
+            message: `What is the Intern's school name ?`,
+            name: 'school',
+        },
+        {
+            type: 'list',
+            message: `choose your team member?`,
+            name: 'choose',
+            choices: ["Engineer", "Intern","Exit"],
+        }, 
+
+    ])
+    .then((data) => {
+        var internName = internConst(data)
+        teamArray.push(internName)
+        console.log(teamArray)
+        if(data.choose === "Exit"){
+            return;
+        } else if(data.choose ==="Engineer") {
+            return getEngineer();
+        } else if(data.choose ==="Intern") {
+            return getIntern();
+        }
+
     })
     .catch((err) => console.error(err));
 }
