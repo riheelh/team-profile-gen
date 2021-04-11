@@ -1,9 +1,10 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
+
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern')
-var teamArray = []
+const Intern = require('./lib/Intern');
+const htmlBuilder = require('./src/page-template');
+var teamArray = [];
 
 //create function to generate the Manager data
 function managerConst(data) {
@@ -22,9 +23,6 @@ function internConst(data) {
     var InternData = new Intern(data.name, data.id, data.email, data.school)
     return InternData
 }
-
-//function to write new html file that ingest data from the array 
-
 
 const init = () => {
     inquirer
@@ -60,8 +58,13 @@ const init = () => {
         var managerName = managerConst(data)
         teamArray.push(managerName)
         console.log(teamArray)
+        
+
+
         if(data.choose === "Exit"){
-            return;
+            return htmlBuilder(teamArray)
+            // console.log(teamArray[0].name, teamArray[0].email, teamArray[0].officeNumber );
+
         } else if(data.choose ==="Engineer") {
             return getEngineer();
         } else if(data.choose ==="Intern") {
@@ -70,6 +73,7 @@ const init = () => {
     })
     .catch((err) => console.error(err));
 }
+
 
 const getEngineer = () => {
     inquirer
@@ -164,13 +168,6 @@ const getIntern = () => {
     })
     .catch((err) => console.error(err));
 }
-
-// function validate(data) {
-//     if(typeof data.id !== 'number') {
-//       return console.log('You need to provide a number for ID');
-//     }
-
-// }
 
 
 //start the app
