@@ -9,19 +9,21 @@ var teamArray = [];
 //create function to generate the Manager data
 function managerConst(data) {
     var ManagerData = new Manager(data.name, data.id, data.email, data.officeNumber)
-    // ManagerData["role"] = ManagerData.getRole()
+    ManagerData["role"] = ManagerData.getRole()
     return ManagerData
 }
 
 //create function to generate the Engineer data
 function engineerConst(data) {
     var EngineerData = new Engineer(data.name, data.id, data.email, data.github)
+    EngineerData["role"] = EngineerData.getRole()
     return EngineerData
 }
 
 //create function to generate the Intern data
 function internConst(data) {
     var InternData = new Intern(data.name, data.id, data.email, data.school)
+    InternData["role"] = InternData.getRole()
     return InternData
 }
 

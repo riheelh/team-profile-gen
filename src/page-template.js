@@ -1,60 +1,66 @@
 const fs = require('fs');
 
-function MangerCard(teamArray) { 
-return `
-    <div class="col s4 m4">
-        <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-                <span class="card-title">${teamArray[0].name}</span>
-                <p> Role: Manager </p>
-                <p>ID : ${teamArray[0].id}</p>
-                <p>Email: ${teamArray[0].email}</p>
-                <p>Number: ${teamArray[0].officeNumber}</p>       
-            </div>
-        </div>
-    </div>`  
-}
 
-function teamCard(teamArray) {
-    var card; 
-        for( let i = 1; i < teamArray.length; i++) {
-            if(teamArray[i].github) {
-        card += `
-        <div class="col s4 m4">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title">${teamArray[i].name}</span>
-                    <p> Role: Engineer  </p>
-                    <p>ID : ${teamArray[i].id}</p>
-                    <p>Email: ${teamArray[i].email}</p>
-                    <p>Github: ${teamArray[i].github}</p>
-                    
-                </div>
-            </div>
-        </div>`
-            }  else if((teamArray[i].school)) {
-        card += `
-        <div class="col s4 m4">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title">${teamArray[i].name}</span>
-                    <p> Role: Intern  </p>
-                    <p>ID : ${teamArray[i].id}</p>
-                    <p>Email: ${teamArray[i].email}</p>
-                    <p>School: ${teamArray[i].school}</p>
-                    
-                </div>
-            </div>
-        </div>`
-                        }         
-        }
-    return card
-}
  
  
 
 //function with HTML body
 function generateHTML(teamArray) {
+
+ 
+
+
+    function MangerCard(teamArray) { 
+        return `
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">${teamArray[0].name}</span>
+                        <p> Role: Manager </p>
+                        <p>ID : ${teamArray[0].id}</p>
+                        <p>Email: ${teamArray[0].email}</p>
+                        <p>Number: ${teamArray[0].officeNumber}</p>       
+                    </div>
+                </div>
+            </div>`  
+        }
+        
+        function teamCard(teamArray) {
+            let card=''; 
+                for( let i = 1; i < teamArray.length ; i++) {
+                    // console.log(teamArray[i])
+                    if(teamArray[i].role == "Engineer") {
+                card += `
+                <div class="col s4 m4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${teamArray[i].name}</span>
+                            <p> Role: ${teamArray[i].role}  </p>
+                            <p>ID : ${teamArray[i].id}</p>
+                            <p>Email: ${teamArray[i].email}</p>
+                            <p>Github: ${teamArray[i].github}</p>
+                            
+                        </div>
+                    </div>
+                </div>`
+                    }  else  {
+                card += `
+                <div class="col s4 m4">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">${teamArray[i].name}</span>
+                            <p> Role: ${teamArray[i].role}   </p>
+                            <p>ID : ${teamArray[i].id}</p>
+                            <p>Email: ${teamArray[i].email}</p>
+                            <p>School: ${teamArray[i].school}</p>
+                            
+                        </div>
+                    </div>
+                </div>`
+                                }         
+                }
+            return card
+        }
     
     return fs.writeFileSync('team.html', 
 `<!DOCTYPE html>
@@ -77,9 +83,9 @@ function generateHTML(teamArray) {
 <div class="container">
         <div class="row">
 
-        ${MangerCard(teamArray)}
+      
 
-        
+        ${MangerCard(teamArray)}
 
         </div>
         <div class="row">

@@ -7,16 +7,5 @@
 //     expect(name.name).toBe(true)
 // })
 
-const Employee = require("../lib/Employee");
 
-describe('validator', () => {
-  it("should set 'number' when created", () => {
-    const num = "baska"";
-
-    const obj = new Employee("riheel" ,num, "email");
-
-    expect(num).toBe(true);
-  });
-
-});
 
