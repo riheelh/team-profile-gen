@@ -9,6 +9,7 @@ var teamArray = [];
 //create function to generate the Manager data
 function managerConst(data) {
     var ManagerData = new Manager(data.name, data.id, data.email, data.officeNumber)
+    // ManagerData["role"] = ManagerData.getRole()
     return ManagerData
 }
 
@@ -55,6 +56,7 @@ const init = () => {
         },
     ])
     .then((data) => {
+        
         var managerName = managerConst(data)
         teamArray.push(managerName)
         console.log(teamArray)
@@ -63,6 +65,7 @@ const init = () => {
 
         if(data.choose === "Exit"){
             return htmlBuilder(teamArray)
+            
             // console.log(teamArray[0].name, teamArray[0].email, teamArray[0].officeNumber );
 
         } else if(data.choose ==="Engineer") {
@@ -111,7 +114,7 @@ const getEngineer = () => {
         teamArray.push(engineerName)
         console.log(teamArray)
         if(data.choose === "Exit"){
-            return;
+            return htmlBuilder(teamArray);
         } else if(data.choose ==="Engineer") {
             return getEngineer();
         } else if(data.choose ==="Intern") {
@@ -158,7 +161,7 @@ const getIntern = () => {
         teamArray.push(internName)
         console.log(teamArray)
         if(data.choose === "Exit"){
-            return;
+            return htmlBuilder(teamArray);
         } else if(data.choose ==="Engineer") {
             return getEngineer();
         } else if(data.choose ==="Intern") {
