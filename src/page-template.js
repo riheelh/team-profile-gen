@@ -55,7 +55,7 @@ function generateHTML(teamArray) {
     }
     
     //output and write to the html file
-    return fs.writeFileSync('team.html', 
+    return fs.writeFileSync(`./dist/team.html`, 
 `<!DOCTYPE html>
 <html lang="en">
 <head>
