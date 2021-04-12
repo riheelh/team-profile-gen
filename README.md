@@ -6,6 +6,8 @@
 ## Description  
 a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.
 
+![Team Profile ScreenShot](./src/team-profile-screenShot.PNG)
+
 ## Table of Contents
 
 - [Installation](#Installation)<br>

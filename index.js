@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -9,25 +8,37 @@ var teamArray = [];
 //create function to generate the Manager data
 function managerConst(data) {
     var ManagerData = new Manager(data.name, data.id, data.email, data.officeNumber)
-    ManagerData["role"] = ManagerData.getRole()
     return ManagerData
 }
 
 //create function to generate the Engineer data
 function engineerConst(data) {
     var EngineerData = new Engineer(data.name, data.id, data.email, data.github)
-    EngineerData["role"] = EngineerData.getRole()
     return EngineerData
 }
 
 //create function to generate the Intern data
 function internConst(data) {
     var InternData = new Intern(data.name, data.id, data.email, data.school)
-    InternData["role"] = InternData.getRole()
     return InternData
 }
 
+//function will reacts on team member select
+function select(data) {
+    if(data.choose === "Exit"){
+        return htmlBuilder(teamArray)
+    } else if(data.choose ==="Engineer") {
+        return getEngineer();
+    } else if(data.choose ==="Intern") {
+        return getIntern();
+    } 
+}
+
+//init function starts with managaer prompts
 const init = () => {
+    console.log('╔═╗┬ ┬┌─┐┌─┐┌─┐┌─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌┬┐┌─┐┌─┐┌┬┐')
+    console.log('║  ├─┤│ ││ │└─┐├┤   └┬┘│ ││ │├┬┘   │ ├┤ ├─┤│││')
+    console.log('╚═╝┴ ┴└─┘└─┘└─┘└─┘   ┴ └─┘└─┘┴└─   ┴ └─┘┴ ┴┴ ┴')
     inquirer
     .prompt([
         {
@@ -57,29 +68,15 @@ const init = () => {
             choices: ["Engineer", "Intern","Exit"],
         },
     ])
-    .then((data) => {
-        
+    .then((data) => {  
         var managerName = managerConst(data)
         teamArray.push(managerName)
-        console.log(teamArray)
-        
-
-
-        if(data.choose === "Exit"){
-            return htmlBuilder(teamArray)
-            
-            // console.log(teamArray[0].name, teamArray[0].email, teamArray[0].officeNumber );
-
-        } else if(data.choose ==="Engineer") {
-            return getEngineer();
-        } else if(data.choose ==="Intern") {
-            return getIntern();
-        }  
+        select(data) 
     })
     .catch((err) => console.error(err));
 }
 
-
+//Engineer prompts
 const getEngineer = () => {
     inquirer
     .prompt([
@@ -114,19 +111,12 @@ const getEngineer = () => {
     .then((data) => {
         var engineerName = engineerConst(data)
         teamArray.push(engineerName)
-        console.log(teamArray)
-        if(data.choose === "Exit"){
-            return htmlBuilder(teamArray);
-        } else if(data.choose ==="Engineer") {
-            return getEngineer();
-        } else if(data.choose ==="Intern") {
-            return getIntern();
-        }
-
+        select(data)
     })
     .catch((err) => console.error(err));
 }
 
+//Intern prompts
 const getIntern = () => {
     inquirer
     .prompt([
@@ -156,24 +146,14 @@ const getIntern = () => {
             name: 'choose',
             choices: ["Engineer", "Intern","Exit"],
         }, 
-
     ])
     .then((data) => {
         var internName = internConst(data)
         teamArray.push(internName)
-        console.log(teamArray)
-        if(data.choose === "Exit"){
-            return htmlBuilder(teamArray);
-        } else if(data.choose ==="Engineer") {
-            return getEngineer();
-        } else if(data.choose ==="Intern") {
-            return getIntern();
-        }
-
+        select(data)
     })
     .catch((err) => console.error(err));
 }
-
 
 //start the app
 init();
